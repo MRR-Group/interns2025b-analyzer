@@ -11,7 +11,7 @@ To run the app locally:
    git clone https://github.com/MRR-Group/interns2025b-analyzer.git
    cd interns2025b-analyzer
    ```
-
+   
 2. Install dependencies:
    ```bash
    flutter pub get
