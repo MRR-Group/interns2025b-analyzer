@@ -1,31 +1,49 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:interns2025b_analyzer/src/feature/select_repository/presentation/providers/get_repository_provider.dart';
+import 'package:interns2025b_analyzer/src/feature/select_repository/presentation/controllers/repository_controller.dart';
 import 'package:interns2025b_analyzer/src/feature/select_repository/presentation/widgets/repository_card_widget.dart';
 
-class SelectRepositoryPage extends ConsumerWidget {
+class SelectRepositoryPage extends ConsumerStatefulWidget {
   const SelectRepositoryPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final repositoryAsync = ref.watch(
-      getRepositoryProvider(("blumilksoftware", "interns2025b-mobile")),
-    );
+  ConsumerState<SelectRepositoryPage> createState() => _SelectRepositoryPageState();
+}
+
+class _SelectRepositoryPageState extends ConsumerState<SelectRepositoryPage> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref
+          .read(repositoryControllerProvider.notifier)
+          .fetch("blumilksoftware", "interns2025b-mobile");
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final repositoryAsync = ref.watch(repositoryControllerProvider);
 
     return Center(
       child: repositoryAsync.when(
-        data: (repository) => RepositoryCard(
-          repositoryName: repository.name,
-          repositoryDescription: repository.description,
-          imageUrl: repository.ownerAvatarUrl,
-          ownerName: repository.ownerName,
-          stargazersCount: repository.stargazersCount,
-          watchersCount: repository.watchersCount,
-          forksCount: repository.forksCount,
-          openIssuesCount: repository.openIssuesCount,
-        ),
+        data: (repository) {
+          if (repository == null) {
+            return const Text('Repository not found');
+          }
+          return RepositoryCard(
+            repositoryName: repository.name,
+            repositoryDescription: repository.description,
+            imageUrl: repository.ownerAvatarUrl,
+            ownerName: repository.ownerName,
+            stargazersCount: repository.stargazersCount,
+            watchersCount: repository.watchersCount,
+            forksCount: repository.forksCount,
+            openIssuesCount: repository.openIssuesCount,
+          );
+        },
         error: (e, _) => Text(e.toString()),
-        loading: () => CircularProgressIndicator(),
+        loading: () => const CircularProgressIndicator(),
       ),
     );
   }

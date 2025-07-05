@@ -1,21 +1,19 @@
+import 'package:interns2025b_analyzer/src/feature/select_repository/domain/entities/repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import '../../data/repositories/repository_repository_provider.dart';
-import '../../domain/usecases/get_repository_usecase.dart';
+import '../../domain/usecases/get_repository_usecase_provider.dart';
 
 part 'repository_controller.g.dart';
 
 @riverpod
 class RepositoryController extends _$RepositoryController {
-  late final GetRepositoryUseCase _useCase;
-
   @override
-  FutureOr<void> build() {
-    _useCase = GetRepositoryUseCase(ref.watch(repositoryRepositoryProvider));
+  FutureOr<Repository?> build() {
     return null;
   }
 
   Future<void> fetch(String owner, String repo) async {
     state = const AsyncLoading();
-    state = await AsyncValue.guard(() => _useCase.execute(owner, repo));
+    final useCase = ref.watch(getRepositoryUseCaseProvider);
+    state = await AsyncValue.guard(() => useCase.execute(owner, repo));
   }
 }
