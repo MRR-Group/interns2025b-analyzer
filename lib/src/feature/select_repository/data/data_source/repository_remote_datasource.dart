@@ -1,3 +1,5 @@
+import 'package:interns2025b_analyzer/src/core/exceptions/http_exception.dart';
+import 'package:interns2025b_analyzer/src/core/exceptions/message_exception.dart';
 import 'package:interns2025b_analyzer/src/core/network/network_service.dart';
 import 'package:interns2025b_analyzer/src/feature/select_repository/data/models/repository_model.dart';
 
@@ -19,8 +21,11 @@ class RepositoryRemoteDataSourceImpl implements RepositoryRemoteDataSource {
       );
 
       return RepositoryModel.fromJson(response);
-    } catch (e) {
-      throw Exception('Failed to fetch repository: $e');
+    } on HttpException catch (e) {
+      rethrow;
+    } on Exception
+    catch (_) {
+      throw MessageException("Something went wrong while fetching repository data. Try again later.");
     }
   }
 }

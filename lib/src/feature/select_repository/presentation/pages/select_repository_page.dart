@@ -24,7 +24,7 @@ class SelectRepositoryPage extends ConsumerWidget {
           forksCount: repository.forksCount,
           openIssuesCount: repository.openIssuesCount,
         ),
-        error: (e, _) => Text('Error: $e'),
+        error: (e, _) => Text(e.toString()),
         loading: () => CircularProgressIndicator(),
       ),
     );
