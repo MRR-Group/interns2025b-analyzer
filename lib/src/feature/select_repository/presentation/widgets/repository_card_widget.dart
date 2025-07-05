@@ -89,37 +89,21 @@ class RepositoryCard extends StatelessWidget {
                   alignment: Alignment.centerLeft,
                   child: Container(
                     constraints: BoxConstraints(maxWidth: 300),
-                    child: LayoutBuilder(
-                      builder: (context, constraints) {
-                        final children = [
-                          _buildStatItem(
-                            Icons.star,
-                            stargazersCount.toString(),
-                          ),
-                          _buildStatItem(
-                            Icons.remove_red_eye_rounded,
-                            watchersCount.toString(),
-                          ),
-                          _buildStatItem(
-                            Icons.fork_right,
-                            forksCount.toString(),
-                          ),
-                          _buildStatItem(
-                            Icons.warning_amber_rounded,
-                            openIssuesCount.toString(),
-                          ),
-                        ];
-                        if (constraints.maxWidth < 150) {
-                          return Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: children,
-                          );
-                        }
-                        return Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: children,
-                        );
-                      },
+                    child: Wrap(
+                      spacing: 24,
+                      runSpacing: 8,
+                      children: [
+                        _buildStatItem(Icons.star, stargazersCount.toString()),
+                        _buildStatItem(
+                          Icons.remove_red_eye_rounded,
+                          watchersCount.toString(),
+                        ),
+                        _buildStatItem(Icons.fork_right, forksCount.toString()),
+                        _buildStatItem(
+                          Icons.warning_amber_rounded,
+                          openIssuesCount.toString(),
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -136,9 +120,11 @@ class RepositoryCard extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Icon(icon, color: secondaryTextColor, size: 16),
-        Padding(
-          padding: const EdgeInsets.only(left: 4.0),
-          child: Text(label, softWrap: true, overflow: TextOverflow.ellipsis),
+        Flexible(
+          child: Padding(
+            padding: const EdgeInsets.only(left: 4.0),
+            child: Text(label, softWrap: true, overflow: TextOverflow.ellipsis),
+          ),
         ),
       ],
     );
