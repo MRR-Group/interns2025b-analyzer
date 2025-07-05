@@ -42,8 +42,10 @@ class RepositoryCard extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: ClipOval(
-                      child: Image.network(imageUrl, width: 20, height: 20),
-                    ),
+                      child: Semantics(
+                        label: 'Avatar of $ownerName',
+                        child: Image.network(imageUrl, width: 20, height: 20),
+                      ),
                   ),
                   Expanded(
                     child: Padding(
