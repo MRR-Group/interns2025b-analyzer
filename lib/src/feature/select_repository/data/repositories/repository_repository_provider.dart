@@ -4,7 +4,7 @@ import '../../domain/repositories/repository_repository.dart';
 import '../data_source/repository_remote_datasource_provider.dart';
 import 'repository_repository_impl.dart';
 
-part 'repository_provider.g.dart';
+part 'repository_repository_provider.g.dart';
 
 @riverpod
 RepositoryRepository repositoryRepository(Ref ref) {
