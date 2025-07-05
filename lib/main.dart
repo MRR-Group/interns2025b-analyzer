@@ -17,6 +17,7 @@ class MyApp extends ConsumerWidget  {
     final router = ref.watch(routerProvider);
 
     return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       routerConfig: router,
       theme: theme,
       title: 'Interns2025b Analyzer',
