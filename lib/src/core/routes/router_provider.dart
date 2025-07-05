@@ -11,7 +11,7 @@ final routerProvider = Provider<GoRouter>((ref) {
       ShellRoute(
         builder: (context, state, child) {
           return Scaffold(
-            appBar: AppBar(title: Text('Interns Analyzer')),
+            appBar: AppBar(title: const Text('Interns2025b Analyzer')),
             body: child,
           );
         },
@@ -25,7 +25,10 @@ final routerProvider = Provider<GoRouter>((ref) {
             builder: (context, state) {
               final owner = state.pathParameters['owner']!;
               final repository = state.pathParameters['name']!;
-              return SelectRepositoryPage(ownerName: owner, repositoryName: repository);
+              return SelectRepositoryPage(
+                ownerName: owner,
+                repositoryName: repository,
+              );
             },
           ),
         ],
