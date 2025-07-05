@@ -21,7 +21,7 @@ class RepositoryRemoteDataSourceImpl implements RepositoryRemoteDataSource {
       );
 
       return RepositoryModel.fromJson(response);
-    } on HttpException catch (e) {
+    } on HttpException catch (_) {
       rethrow;
     } on Exception
     catch (_) {

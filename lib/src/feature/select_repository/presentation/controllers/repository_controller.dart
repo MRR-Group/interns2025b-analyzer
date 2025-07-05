@@ -1,4 +1,3 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../data/repositories/repository_repository_provider.dart';
 import '../../domain/usecases/get_repository_usecase.dart';
