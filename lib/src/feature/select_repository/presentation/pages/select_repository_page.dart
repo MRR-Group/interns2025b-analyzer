@@ -9,7 +9,7 @@ class SelectRepositoryPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final repositoryAsync = ref.watch(
-      fetchRepositoryProvider(("blumilksoftware", "interns2025b-mobile")),
+      getRepositoryProvider(("blumilksoftware", "interns2025b-mobile")),
     );
 
     return Center(
