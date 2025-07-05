@@ -38,6 +38,7 @@ class _SelectRepositoryPageState extends ConsumerState<SelectRepositoryPage> {
           if (repository == null) {
             return const CircularProgressIndicator();
           }
+
           return RepositoryCard(
             repositoryName: repository.name,
             repositoryDescription: repository.description,
