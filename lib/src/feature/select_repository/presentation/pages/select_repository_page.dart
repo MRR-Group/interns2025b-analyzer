@@ -29,7 +29,7 @@ class _SelectRepositoryPageState extends ConsumerState<SelectRepositoryPage> {
       child: repositoryAsync.when(
         data: (repository) {
           if (repository == null) {
-            return const Text('Repository not found');
+            return const CircularProgressIndicator();
           }
           return RepositoryCard(
             repositoryName: repository.name,
