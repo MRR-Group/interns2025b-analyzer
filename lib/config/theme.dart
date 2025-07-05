@@ -44,9 +44,11 @@ ThemeData theme = ThemeData(
   ),
   cardTheme: CardThemeData(
     margin: EdgeInsets.zero,
-    color: backgroundColor,
+    color: backgroundLightColor,
+    shadowColor: Colors.grey,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(8),
+      side: BorderSide(color: Colors.transparent, width: 0)
     ),
   ),
   snackBarTheme: const SnackBarThemeData(
