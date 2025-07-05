@@ -46,6 +46,7 @@ class RepositoryCard extends StatelessWidget {
                         label: 'Avatar of $ownerName',
                         child: Image.network(imageUrl, width: 20, height: 20),
                       ),
+                    ),
                   ),
                   Expanded(
                     child: Padding(
