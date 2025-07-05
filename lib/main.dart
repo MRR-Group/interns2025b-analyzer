@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:interns2025b_analyzer/config/theme.dart';
-import 'package:interns2025b_analyzer/src/shared/presentation/pages/select_repository_page.dart';
+import 'package:interns2025b_analyzer/src/feature/select_repository/presentation/pages/select_repository_page.dart';
 
 void main() {
   runApp(ProviderScope(child: const MyApp()));

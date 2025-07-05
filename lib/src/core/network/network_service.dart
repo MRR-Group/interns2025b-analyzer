@@ -8,12 +8,12 @@ import '../exceptions/http_exception.dart';
 import '../exceptions/message_exception.dart';
 import '../exceptions/no_internet_exception.dart';
 
-class HttpClient {
+class NetworkService {
   final Dio _dio;
   final String baseUrl;
   final String rootPem;
 
-  HttpClient({Dio? dio, required this.baseUrl, this.rootPem = ''})
+  NetworkService({Dio? dio, required this.baseUrl, this.rootPem = ''})
       : _dio = dio ?? Dio(BaseOptions(baseUrl: baseUrl)) {
     _initAdapter();
   }
@@ -81,8 +81,9 @@ class HttpClient {
     Map<String, String>? queryParams,
   }) async {
     try {
+      final url = '$baseUrl/$urlPath';
       final response = await _dio.get<Map<String, dynamic>>(
-        '/$urlPath',
+        url,
         queryParameters: queryParams,
         options: Options(headers: await _getHeaders()),
       );
