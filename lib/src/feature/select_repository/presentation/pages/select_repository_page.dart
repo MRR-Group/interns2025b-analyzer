@@ -49,7 +49,11 @@ class _SelectRepositoryPageState extends ConsumerState<SelectRepositoryPage> {
             openIssuesCount: repository.openIssuesCount,
           );
         },
-        error: (e, _) => Text(e.toString()),
+        error: (e, _) => Center(
+          child: Text(
+            e.toString(),
+          ),
+        ),
         loading: () => const CircularProgressIndicator(),
       ),
     );
