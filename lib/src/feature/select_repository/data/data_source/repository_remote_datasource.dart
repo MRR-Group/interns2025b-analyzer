@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:interns2025b_analyzer/src/core/exceptions/http_exception.dart';
 import 'package:interns2025b_analyzer/src/core/exceptions/message_exception.dart';
 import 'package:interns2025b_analyzer/src/core/network/network_service.dart';
