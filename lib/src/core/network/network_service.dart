@@ -10,9 +10,8 @@ import '../exceptions/no_internet_exception.dart';
 class NetworkService {
   final Dio _dio;
   final String baseUrl;
-  final String rootPem;
 
-  NetworkService({Dio? dio, required this.baseUrl, this.rootPem = ''})
+  NetworkService({Dio? dio, required this.baseUrl})
       : _dio = dio ?? Dio(BaseOptions(baseUrl: baseUrl));
 
   Future<Map<String, dynamic>> postRequest({
