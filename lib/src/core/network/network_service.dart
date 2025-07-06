@@ -1,34 +1,18 @@
 import 'dart:convert';
 import 'dart:io' as io;
 import 'package:dio/dio.dart';
-import 'package:dio/io.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../exceptions/http_exception.dart';
 import '../exceptions/message_exception.dart';
 import '../exceptions/no_internet_exception.dart';
 
-class HttpClient {
+class NetworkService {
   final Dio _dio;
   final String baseUrl;
-  final String rootPem;
 
-  HttpClient({Dio? dio, required this.baseUrl, this.rootPem = ''})
-      : _dio = dio ?? Dio(BaseOptions(baseUrl: baseUrl)) {
-    _initAdapter();
-  }
-
-  void _initAdapter() {
-    (_dio.httpClientAdapter as IOHttpClientAdapter).createHttpClient = () {
-      final client = io.HttpClient();
-      client.badCertificateCallback =
-          (io.X509Certificate cert, String host, int port) {
-        //return cert.pem == rootPem;
-        return true;
-      };
-      return client;
-    };
-  }
+  NetworkService({Dio? dio, required this.baseUrl})
+      : _dio = dio ?? Dio(BaseOptions(baseUrl: baseUrl));
 
   Future<Map<String, dynamic>> postRequest({
     Map<String, dynamic> body = const {},
@@ -81,8 +65,9 @@ class HttpClient {
     Map<String, String>? queryParams,
   }) async {
     try {
+      final url = '$baseUrl/$urlPath';
       final response = await _dio.get<Map<String, dynamic>>(
-        '/$urlPath',
+        url,
         queryParameters: queryParams,
         options: Options(headers: await _getHeaders()),
       );
@@ -104,7 +89,6 @@ class HttpClient {
     return {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
-      'X-Client-Platform': 'mobile',
     };
   }
 
